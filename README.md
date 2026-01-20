@@ -4,7 +4,7 @@ A web application for casting to multiple smart TVs simultaneously with automati
 
 ## Features
 
-- 🔍 **Automatic Device Discovery**: Automatically finds Chromecast devices on your network using mDNS
+- 🔍 **Automatic Device Discovery**: Automatically finds Chromecast devices on your network using Bonjour/mDNS
 - 📺 **Multi-Device Casting**: Cast to multiple TVs simultaneously (not possible with standard Chrome casting)
 - 🏷️ **Device Names**: Shows the friendly names of discovered devices
 - 🌐 **Web Interface**: Easy-to-use web interface for device management and casting control
@@ -15,15 +15,6 @@ A web application for casting to multiple smart TVs simultaneously with automati
 
 - Node.js (v14 or higher)
 - Chromecast devices on the same network
-- Avahi daemon (Linux) or Bonjour (macOS) for mDNS support
-
-### Linux Setup
-
-On Linux, you need to install Avahi for mDNS support:
-
-```bash
-sudo apt-get install libavahi-compat-libdnssd-dev
-```
 
 ## Installation
 
@@ -67,7 +58,7 @@ http://localhost:3000
 
 ### Device Discovery
 
-The application uses mDNS (Multicast DNS) to discover Chromecast devices on your local network. This means:
+The application uses Bonjour/mDNS (Multicast DNS) to discover Chromecast devices on your local network. This means:
 - No need to manually enter IP addresses
 - Devices are automatically detected when they come online
 - Device names are retrieved from the devices themselves
@@ -118,8 +109,8 @@ Get the status of active casting sessions.
 
 ### No devices found
 - Ensure your Chromecast devices are powered on and connected to the same network
-- Check that mDNS/Avahi is installed and running
 - Verify that your firewall isn't blocking mDNS traffic (port 5353)
+- Check that the server and Chromecast devices are on the same subnet
 
 ### Casting fails
 - Make sure the URL is publicly accessible
