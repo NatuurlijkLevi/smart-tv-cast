@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart TV Cast - Multi-Device Casting</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🖥️ Smart TV Cast</h1>
+            <p class="subtitle">Cast to multiple smart TVs simultaneously</p>
+        </header>
+
+        <main>
+            <!-- Device Discovery Section -->
+            <section class="section">
+                <h2>📺 Discovered Devices</h2>
+                <div class="status-bar">
+                    <span id="connection-status" class="status-indicator">🔴 Connecting...</span>
+                    <span id="device-count">0 devices found</span>
+                </div>
+                <div id="devices-list" class="devices-grid">
+                    <div class="no-devices">
+                        <p>🔍 Searching for devices...</p>
+                        <p class="hint">Make sure your Chromecast devices are on the same network</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Casting Control Section -->
+            <section class="section">
+                <h2>🎬 Casting Control</h2>
+                <div class="casting-controls">
+                    <div class="input-group">
+                        <label for="url-input">URL to Cast:</label>
+                        <input 
+                            type="url" 
+                            id="url-input" 
+                            placeholder="https://example.com or local file path"
+                            value="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                        >
+                    </div>
+                    
+                    <div class="button-group">
+                        <button id="cast-btn" class="btn btn-primary" disabled>
+                            ▶️ Cast to Selected Devices
+                        </button>
+                        <button id="stop-btn" class="btn btn-secondary" disabled>
+                            ⏹️ Stop Casting
+                        </button>
+                        <button id="select-all-btn" class="btn btn-tertiary">
+                            ☑️ Select All
+                        </button>
+                        <button id="deselect-all-btn" class="btn btn-tertiary">
+                            ☐ Deselect All
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Active Casts Section -->
+            <section class="section">
+                <h2>📡 Active Casts</h2>
+                <div id="active-casts" class="active-casts-list">
+                    <p class="no-active">No active casting sessions</p>
+                </div>
+            </section>
+
+            <!-- Logs Section -->
+            <section class="section">
+                <h2>📋 Activity Log</h2>
+                <div id="logs" class="logs-container"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Smart TV Cast - Automatic Device Discovery & Multi-Device Casting</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
