@@ -64,17 +64,42 @@ function updateDevicesList() {
         return;
     }
     
-    devicesListEl.innerHTML = devices.map(device => `
-        <div class="device-card ${selectedDevices.has(device.id) ? 'selected' : ''}" 
-             data-device-id="${device.id}"
-             onclick="toggleDeviceSelection('${device.id}')">
-            <div class="device-name">📺 ${device.name}</div>
-            <div class="device-info">Type: ${device.type}</div>
-            <div class="device-info">IP: ${device.host}:${device.port}</div>
-            <span class="device-status">Available</span>
-        </div>
-    `).join('');
+    devicesListEl.innerHTML = devices.map(device => {
+        const deviceId = escapeHtml(device.id);
+        const deviceName = escapeHtml(device.name);
+        const deviceType = escapeHtml(device.type);
+        const deviceHost = escapeHtml(device.host);
+        const devicePort = escapeHtml(String(device.port));
+        
+        return `
+            <div class="device-card ${selectedDevices.has(device.id) ? 'selected' : ''}" 
+                 data-device-id="${deviceId}">
+                <div class="device-name">📺 ${deviceName}</div>
+                <div class="device-info">Type: ${deviceType}</div>
+                <div class="device-info">IP: ${deviceHost}:${devicePort}</div>
+                <span class="device-status">Available</span>
+            </div>
+        `;
+    }).join('');
 }
+
+// Escape HTML to prevent XSS
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Handle device selection via event delegation
+devicesListEl.addEventListener('click', (event) => {
+    const deviceCard = event.target.closest('.device-card');
+    if (deviceCard) {
+        const deviceId = deviceCard.getAttribute('data-device-id');
+        if (deviceId) {
+            toggleDeviceSelection(deviceId);
+        }
+    }
+});
 
 // Toggle device selection
 function toggleDeviceSelection(deviceId) {

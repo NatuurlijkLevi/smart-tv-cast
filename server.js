@@ -31,7 +31,7 @@ wss.on('connection', (ws) => {
   }));
 
   ws.on('close', () => {
-    clients.remove(ws);
+    clients.delete(ws);
     console.log('WebSocket client disconnected');
   });
 });
